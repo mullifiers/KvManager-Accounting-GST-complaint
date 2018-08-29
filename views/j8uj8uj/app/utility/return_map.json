@@ -1,0 +1,181 @@
+{
+    "b2b":
+                    {   
+                        "inum":  "Invoice Number" ,
+                        "idt":  "Invoice date" ,
+                        "val":  "Invoice Value" ,
+                        "pos":  "Place Of Supply" ,
+                        "rchrg":  "Reverse Charge" ,
+                        "etin":  "E-Commerce GSTIN" ,
+                        "ctin":  "GSTIN/UIN of Recipient" 
+                    },
+                
+    
+    "b2ba":         {
+                        "onum":  "Original Invoice Number" ,
+                        "odt": "Original Invoice date" ,
+                        "inum":  "Revised Invoice Number" ,
+                        "idt":  "Revised Invoice date" ,
+                        "val":  "Total Invoice Value" ,
+                        "pos":  "Place Of Supply" ,
+                        "rchrg":  "Reverse Charge" ,
+                        "prs":  "Provisional Assessment" ,
+                        "etin":  "E-Commerce GSTIN" ,
+                        "ctin":  "GSTIN/UIN" 
+                    },
+                
+    "b2cl":
+                    {
+                        "etin": "E-Commerce GSTIN" ,
+                        "inum": "Invoice Number" ,
+                        "idt":  "Invoice date" ,
+                        "val":  "Invoice Value" ,
+                        "pos":  "Place Of Supply" 
+
+                    },
+    "b2cla":        
+                    {
+              
+                        "onum":  "Original Invoice Number" ,
+                        "odt":  "Original Invoice date" ,
+                        "inum":  "Revised Invoice Number" ,
+                        "idt":  "Revised Invoice date" ,
+                        "val":  "Total Invoice Value" ,
+                        "pos":  "Place Of Supply" ,
+                        "etin":  "E-Commerce GSTIN" 
+              
+                    },
+                
+    "at":           {
+                            "pos":  "Place Of Supply" 
+                    },
+    "ata":
+                    {
+                        "ocpty":  "Original Customer GSTIN/UIN/Name" ,
+                        "odoc_num":  "Original Document Number" ,
+                        "odoc_dt":  "Original Document date" ,
+                        "cpty":  "Revised Customer GSTIN/UIN/Name" ,
+                        "state_cd":  "Recipient State Code" ,
+                        "doc_num":  "Revised Document Number" ,
+                        "doc_dt":  "Revised Document date" ,
+                        "ad_amt":  "Total Invoice Value" 
+                    },             
+        
+    "exp":              
+                    {
+                        "exp_typ":  "Export Type" ,
+                        "inum":  "Invoice Number" ,
+                        "idt":  "Invoice date" ,
+                        "val":  "Invoice Value" ,
+                        "sbpcode":  "Port Code" ,
+                        "sbnum":   "Shipping Bill Number" ,
+                        "sbdt":  "Shipping Bill Date" 
+                    },
+
+    "expa":             
+                    {
+                        "ex_tp":  "Export Type" ,
+                        "onum":  "Original Invoice Number" ,
+                        "odt":  "Original Invoice date" ,
+                        "inum":  "Revised Invoice Number" ,
+                        "idt":  "Revised Invoice date" ,
+                        "val":  "Total Invoice Value" ,
+                        "sbpcode":  "Port Code" ,
+                        "sbnum":  "Ship Bill Number" ,
+                        "sbdt":  "Ship Bill Date" 
+                    },
+          
+    "cndr":
+                    {
+                        "nt_num":  "Note/Refund Voucher Number" ,
+                        "nt_dt":  "Note/Refund Voucher date" ,
+                        "inum":  "Invoice/Advance Receipt Number" ,
+                        "ntty":  "Document Type" ,
+                        "rsn":  "Reason For Issuing document" ,
+                        "idt":  "Invoice/Advance Receipt date" ,
+                        "val":  "Note/Refund Voucher Value" ,
+                        "p_gst":  "Pre GST" ,
+                        "pos":  "Place Of Supply" ,
+                        "ctin":  "GSTIN/UIN of Recipient" 
+                    },
+    "cdnur":
+                    {
+                        "nt_num":  "Note/Refund Voucher Number" ,
+                        "nt_dt":  "Note/Refund Voucher date" ,
+                        "inum":  "Invoice/Advance Receipt Number" ,
+                        "ntty":  "Document Type" ,
+                        "rsn":  "Reason For Issuing document" ,
+                        "idt":  "Invoice/Advance Receipt date" ,
+                        "val":  "Note/Refund Voucher Value" ,
+                        "p_gst":  "Pre GST" ,
+                        "typ":  "UR Type" ,
+                        "pos":  "Place Of Supply" 
+                    },
+    "cdnra":        
+                    {
+                        "ont_num":  "Original Debit Note Number" ,
+                        "ont_dt":  "Original Debit Note date" ,
+                        "nt_num":  "Revised Debit Note Number" ,
+                        "nt_dt":  "Revised Debit Note date" ,
+                        "inum":  "Invoice Number" ,
+                        "ntty":  "Note Type" ,
+                        "rsn":  "Reason For Issuing Note" ,
+                        "idt":  "Invoice date" ,
+                        "val":  "Total Differential Value" ,
+                        "etin":  "E-Commerce GSTIN" ,
+                        "ctin":  "GSTIN/UIN" ,
+                        "irt":  "IGST Rate" ,
+                        "iamt":  "IGST Amount" ,
+                        "crt":  "CGST Rate" ,
+                        "camt":  "CGST Amount" ,
+                        "srt":  "SGST Rate" ,
+                        "samt":  "SGST Amount" ,
+                        "csrt":  "CESS Rate" ,
+                        "csamt":  "Cess Amount" 
+                    },
+    "b2cs":
+                    {
+                            "rt":  "Rate" ,
+                            "typ":  "Type" ,
+                            "etin":  "E-Commerce GSTIN" ,
+                            "pos":   "Place Of Supply" ,
+                            "txval":  "Taxable Value" ,
+                            "csamt":  "Cess Amount" 
+                    },
+    "b2csa":
+                    {
+                        "osupst_cd":  "Original State Code" ,
+                        "state_cd":  "Recipient State Code" ,
+                        "etin":  "E-Commerce GSTIN" ,
+                        "oty":  "Original Category" ,
+                        "ty":  "Revised Category" ,
+                        "typ":  "Type" ,
+                        "txval":  "Total Taxable Value" ,
+                        "irt":  "IGST Rate" ,
+                        "iamt":  "IGST Amount" ,
+                        "crt":  "CGST Rate" ,
+                        "camt":  "CGST Amount" ,
+                        "srt":  "SGST Rate" ,
+                        "samt":  "SGST Amount" ,
+                        "csrt":  "CESS Rate" ,
+                        "csamt":  "Cess Amount" 
+                    },
+    "atadj":
+                    {        
+                        "pos":  "Place Of Supply" 
+                    },
+
+    "hsn":
+                    {
+                        "hsn_sc":  "HSN" ,
+                        "desc":  "Description" ,
+                        "uqc":  "UQC" ,
+                        "qty":  "Total Quantity" ,
+                        "val":  "Total Value" ,
+                        "txval":  "Taxable Value" ,
+                        "iamt":  "Integrated Tax Amount" ,
+                        "samt":  "State/UT Tax Amount" ,
+                        "camt":  "Central Tax Amount" ,
+                        "csamt":  "Cess Amount" 
+                    },
+}

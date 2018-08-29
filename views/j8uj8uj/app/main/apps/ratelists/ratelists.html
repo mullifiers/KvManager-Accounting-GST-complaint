@@ -1,0 +1,317 @@
+<div id="ratelists" class="page-layout simple left-sidenav inner-sidenav">
+  
+    <!-- HEADER -->
+    <div class="header md-accent-bg" layout="row" layout-align="space-between center">
+        
+        <!-- APP TITLE -->
+        <div layout="row" layout-align="start center">
+            <md-button class="md-icon-button sidenav-toggle" hide-gt-md ng-click="vm.toggleSidenav('sidenav')"
+                       aria-label="Toggle sidenav" translate translate-attr-aria-label="RATELISTS.TOGGLE_SIDENAV">
+                <md-icon md-font-icon="icon-menu" class="icon"></md-icon>
+            </md-button>
+
+            <div class="logo" layout="row" layout-align="start center">
+                <span class="logo-icon">
+                    <md-icon md-font-icon="icon-cash-usd" class="s24"></md-icon>
+                </span>
+                <span class="logo-text" translate="RATELISTS.RATELISTS">Ratelists</span>
+            </div>
+        </div>
+        <!-- / APP TITLE -->
+
+        <!-- SEARCH -->
+        <div class="search-input-wrapper" layout="row" layout-align="start center">
+            <label for="search">
+                <md-icon md-font-icon="icon-magnify"></md-icon>
+            </label>
+            <md-input-container md-no-float class="m-0">
+                <input id="search" placeholder="Search for any list" type="text" ng-model="vm.search" translate
+                       >
+            </md-input-container>
+        </div>
+        <!-- / SEARCH -->
+
+    </div>
+    <!-- / HEADER -->
+
+    <!-- SELECTED BAR -->
+    <div ng-show="vm.selectedRatelists.length > 0" class="selected-bar header animate-slide-down md-accent-bg"
+         layout="row" layout-align="start center">
+
+        <div class="close-button-wrapper" ng-click="vm.selectedRatelists =[]">
+            <md-button layout="row" layout-align="start center">
+                <md-icon md-font-icon="icon-arrow-left" class="mr-8"></md-icon>
+                <span translate="RATELISTS.BACK">Back</span>
+            </md-button>
+        </div>
+
+        <div flex layout="row" layout-align="space-between center">
+
+            <div>
+                <span class="selected-ratelists-count">
+                    <span>{{vm.selectedRatelists.length}}</span>
+                    <span translate="RATELISTS.SELECTED">selected</span>
+                </span>
+
+                <md-menu class="select-menu" ng-if="!vm.currentThread">
+                    <md-button class="md-icon-button"
+                               ng-click="$mdOpenMenu($event)"
+                               aria-label="multi select toggle"
+                               translate translate-attr-aria-label="RATELISTS.MULTI_SELECT_TOGGLE">
+                        <md-icon md-font-icon="icon-menu-down"></md-icon>
+                    </md-button>
+                    <md-menu-content width="3">
+                        <md-menu-item>
+                            <md-button ng-click="vm.selectAllRatelists()" translate="RATELISTS.SELECT_ALL">
+                                Select all
+                            </md-button>
+                        </md-menu-item>
+                        <md-menu-item>
+                            <md-button ng-click="vm.deselectRatelists()" translate="RATELISTS.SELECT_NONE">
+                                Select none
+                            </md-button>
+                        </md-menu-item>
+                    </md-menu-content>
+                </md-menu>
+            </div>
+
+            <div class="multi-select-actions">
+                <md-button class="md-icon-button" ng-click="vm.deleteSelectedRatelists($event)"
+                           aria-label="delete selected" translate translate-attr-label="RATELISTS.DELETE_SELECTED">
+                    <md-icon md-font-icon="icon-delete"></md-icon>
+                </md-button>
+            </div>
+
+        </div>
+
+    </div>
+    <!-- / SELECTED BAR -->
+
+    <!-- CONTENT -->
+    <div class="content" md-background-bg layout="row" layout-align="start start">
+
+        <!-- SIDENAV -->
+        <md-sidenav class="sidenav main-sidenav md-white-bg" ms-scroll md-is-locked-open="$mdMedia('gt-md')"
+                    layout="column" flex="100" md-component-id="sidenav"
+                    ms-sidenav-helper ng-include="'app/main/apps/ratelists/sidenavs/main/main-sidenav.html'">
+        </md-sidenav>
+        <!-- / SIDENAV -->
+
+        <!-- MAIN -->
+        <div class="main scrollable" ms-scroll>
+
+            <!-- RATELIST LIST -->
+            <md-list class="ratelists-list">
+
+                <!-- RATELIST LIST HEADER -->
+                <md-subheader class="md-no-sticky md-white-bg">
+
+                    <div layout="row" layout-align="space-between center">
+
+                        <div class="list-title" layout="row" layout-align="start center"
+                             ng-hide="editGroupForm.$visible">
+                            <span ng-if="vm.listType === 'all'" translate="RATELISTS.ALL_RATELISTS">All ratelists</span>
+                            <span ng-if="vm.listType === 'frequent'" translate="RATELISTS.FREQUENTLY_RATELISTED">Frequnetly
+                                ratelisted</span>
+                            <span ng-if="vm.listType === 'starred'" translate="RATELISTS.STARRED_RATELISTS">Starred
+                                ratelists</span>
+                            <span ng-if="vm.listType.name">{{vm.listType.name}}</span>
+
+                            <span ng-if="filteredRatelists.length" class="secondary-text ratelists-count">
+                                ({{filteredRatelists.length}})
+                            </span>
+                        </div>
+
+                        <div class="edit-group-form" ng-show="vm.listType.name" layout="row"
+                             layout-align="start center">
+                            <span ng-show="editGroupForm.$visible"
+                                  editable-text="vm.listType.name"
+                                  e-form="editGroupForm"
+                                  onaftersave="vm.editGroup()">
+                            </span>
+
+                            <md-button class="md-icon-button edit-group-button" ng-click="editGroupForm.$show()"
+                                       ng-hide="editGroupForm.$visible" aria-label="edit group name" translate
+                                       translate-attr-label="RATELISTS.EDIT_GROUP_NAME">
+                                <md-icon md-font-icon="icon-pencil s18"></md-icon>
+                            </md-button>
+
+                            <md-button class="md-icon-button edit-group-button" ng-click="vm.deleteGroup($event)"
+                                       ng-hide="editGroupForm.$visible" aria-label="delete group" translate
+                                       translate-attr-label="RATELISTS.DELETE_GROUP">
+                                <md-icon md-font-icon="icon-delete s18"></md-icon>
+                            </md-button>
+                        </div>
+
+                        <div flex></div>
+
+                        <md-menu>
+
+                            <md-button class="md-icon-button" aria-label="Sort" translate
+                                       translate-attr-aria-label="RATELISTS.SORT">
+                                <md-icon md-font-icon="icon-sort-alphabetical"
+                                         ng-click="$mdOpenMenu($event)"></md-icon>
+                            </md-button>
+
+                            <md-menu-content width="3">
+
+                                <md-menu-item>
+                                    <md-button ng-click="vm.listOrder = 'name';vm.listOrderAsc = false"
+                                               ng-style="vm.listOrder === 'name' && vm.listOrderAsc=== false && {'font-weight':'500'}">
+                                        <span translate="RATELISTS.FIRST_NAME">First Name</span>
+                                        <small translate="RATELISTS.A_TO_Z">(A to Z)</small>
+                                    </md-button>
+                                </md-menu-item>
+
+                                <md-menu-item>
+                                    <md-button ng-click="vm.listOrder = 'name'; vm.listOrderAsc = true"
+                                               ng-style="vm.listOrder === 'name' && vm.listOrderAsc=== true && {'font-weight':'500'}">
+                                        <span translate="RATELISTS.FIRST_NAME">First Name</span>
+                                        <small translate="RATELISTS.Z_TO_A">(Z to A)</small>
+                                    </md-button>
+                                </md-menu-item>
+
+                                <md-menu-item>
+                                    <md-button ng-click="vm.listOrder = 'lastName';vm.listOrderAsc = false"
+                                               ng-style="vm.listOrder === 'lastName' && vm.listOrderAsc=== false && {'font-weight':'500'}">
+                                        <span translate="RATELISTS.LAST_NAME">Last Name</span>
+                                        <small translate="RATELISTS.A_TO_Z">(A to Z)</small>
+                                    </md-button>
+                                </md-menu-item>
+
+                                <md-menu-item>
+                                    <md-button ng-click="vm.listOrder = 'lastName'; vm.listOrderAsc = true"
+                                               ng-style="vm.listOrder === 'lastName' && vm.listOrderAsc=== true && {'font-weight':'500'}">
+                                        <span translate="RATELISTS.LAST_NAME">Last Name</span>
+                                        <small translate="RATELISTS.Z_TO_A">(Z to A)</small>
+                                    </md-button>
+                                </md-menu-item>
+
+                            </md-menu-content>
+
+                        </md-menu>
+
+                    </div>
+
+                </md-subheader>
+                <!-- / RATELIST LIST HEADER -->
+
+                <!-- RATELIST ITEM -->
+                <md-list-item class="ratelist-item md-white-bg" md-no-ink
+                              ng-repeat="ratelist in vm.ratelists | filter: vm.search | filter: global.search | filterBy_Ids :vm.filterIds |  orderBy: vm.listOrder :vm.listOrderAsc | filter:query as filteredRatelists track by $index "
+                              ng-click="vm.openRatelistDialog(ratelist)"
+                              ng-style="{'transform': 'translate3d(0px, '+$index * 100+'%, 0px)', 'z-index': filteredRatelists.length - $index}"
+                              ng-class="{'selected': vm.isSelected(ratelist)}">
+
+                    <md-checkbox ng-checked="vm.exists(ratelist, vm.selectedRatelists)"
+                                 ng-click="vm.toggleSelectRatelist(ratelist, $event)"
+                                 aria-label="{{vm.exists(ratelist, vm.selectedRatelists) ? 'Deselect' : 'Select'}}">
+                    </md-checkbox>
+
+                    <img class="md-avatar" ng-if="ratelist.avatar" alt="{{ratelist.name}}"
+                         ng-src="{{ratelist.avatar}}"/>
+
+                    <p class="text-truncate font-weight-600">{{ratelist.name}} </p>
+
+
+                    <p class="email text-truncate hide show-gt-sm">
+                        {{ratelist.description}}
+                    </p>
+
+                    <div class="actions" layout="row" layout-align="start center">
+                        <md-button class="md-icon-button  hide show-gt-xs"
+                                   ng-click="$event.stopPropagation();vm.toggleInArray(ratelist._id, vm.user.starred)"
+                                   aria-label="Toggle starred" translate
+                                   translate-attr-aria-label="RATELISTS.TOGGLE_STARRED">
+                            <md-icon ng-if="vm.exists(ratelist._id,vm.user.starred)" md-font-icon="icon-star"
+                                     class="amber-fg"></md-icon>
+                            <md-icon ng-if="!vm.exists(ratelist._id,vm.user.starred)"
+                                     md-font-icon="icon-star-outline"></md-icon>
+                        </md-button>
+
+                        <md-menu>
+                            <md-button class="md-icon-button" aria-label="More" translate
+                                       translate-attr-aria-label="RATELISTS.MORE">
+                                <md-icon md-font-icon="icon-dots-vertical" ng-click="$mdOpenMenu($event)"></md-icon>
+                            </md-button>
+
+                            <md-menu-content width="3">
+                                <md-menu-item>
+                                    <md-button ng-click="vm.deleteRatelistConfirm(ratelist, ev)"
+                                               translate="RATELISTS.DELETE_RATELIST">
+                                        Delete Ratelist
+                                    </md-button>
+                                </md-menu-item>
+
+                                <md-divider ng-if="vm.user.groups"></md-divider>
+
+                                <md-subheader class="md-no-sticky" ng-if="vm.user.groups">Groups</md-subheader>
+
+                                <md-list-item ng-if="vm.user.groups" ng-repeat="group in vm.user.groups"
+                                              ng-click="vm.toggleInArray(ratelist._id,group.ratelistIds)">
+                                    <p class="pl-8"
+                                       ng-style="vm.exists(ratelist._id,group.ratelistIds) && {'font-weight':'500'}">
+                                        {{group.name}}
+                                    </p>
+                                </md-list-item>
+
+                            </md-menu-content>
+                        </md-menu>
+                    
+                    </div>
+
+                </md-list-item>
+                <!-- RATELIST ITEM -->
+
+            </md-list>
+            <!-- / RATELIST LIST -->
+
+            <!-- NO RESULTS -->
+            <md-list-item class="no-results md-white-bg" ng-show="filteredRatelists.length === 0">
+                <p translate="RATELISTS.NO_RESULTS">No results..</p>
+            </md-list-item>
+            <!-- / NO RESULTS -->
+
+        </div>
+        <!-- / MAIN -->
+
+    </div>
+    <!-- / CONTENT -->
+
+    <!-- ADD RATELIST BUTTON -->
+    <md-button class="md-fab md-accent md-icon-button" id="add-ratelist-button" ng-click="vm.openRatelistDialog()"
+               aria-label="add ratelist" translate translate-attr-aria-label="RATELISTS.ADD_RATELIST">
+        <md-icon md-font-icon="icon-box-upload"></md-icon>
+    </md-button>
+    <!-- / ADD RATELIST BUTTON -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>

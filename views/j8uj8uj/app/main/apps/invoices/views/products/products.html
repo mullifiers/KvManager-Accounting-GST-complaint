@@ -1,0 +1,166 @@
+<div id="invoices-products" class="page-layout carded fullwidth" layout="row">
+
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg md-accent-bg"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center" layout="column" flex>
+
+        <!-- CONTENT HEADER -->
+        <div class="header" layout="row" layout-align="space-between center">
+            <div layout="row" layout-align="space-between center">
+            <div style="width:200px" class="white-fg" layout="column" layout-align="start start">
+                <div class="h1" layout="row" layout-align="start center">
+                    <md-icon md-font-icon="icon-cube-outline"></md-icon>
+                    <span fuck_translate="EC.PRODUCTS">Products</span>
+                </div>
+                <div class="product-count secondary-text">
+                    <span fuck_translate="EC.TOTAL_PRODUCTS">Total products:</span>
+                    <span>{{vm.products.length}}</span>
+                </div>
+                
+            </div>
+        
+            <md-button style="padding:2px;width:180px" class="md-accent md-raised" ng-click="vm.addNewProduct()" aria-label="ADD PRODUCT">
+             ADD PRODUCT 
+            </md-button>
+            <style>
+                md-autocomplete-wrap > input[type="search"] {
+                    background: rgb(56, 162, 214);
+                    color:rgb(255, 255, 255)
+                }
+                md-autocomplete-wrap > ::-webkit-input-placeholder{
+                    color:rgb(255, 255, 255)
+                }
+                md-autocomplete.md-default-theme, md-autocomplete {
+                    background: rgba(255, 255, 255, 0.73)
+                    
+                }
+            </style>
+            <md-autocomplete
+                            md-select-on-match ="true"
+                            md-match-case-insensitive ="true"
+                            md-min-length ="0"
+                            flex="60"
+                            
+                            md-require-match="true"
+                            md-selected-item-change="vm.ratelistChange()"
+                            md-no-cache="vm.autocomplete.noCache"
+                            md-selected-item="vm.selectedList"
+                            md-search-text="vm.customerSearch"
+                            md-items="item in vm.ratelists | filter : vm.customerSearch"
+                            md-item-text="item.name"
+                            placeholder="get Rate List">
+                        
+                        <md-item-template>
+
+                                <span  md-highlight-flags="^i">
+                                    {{item.name}}
+                                </span>
+                        </md-item-template>
+                        </md-autocomplete>
+
+            </div>
+
+            
+            <div class="search" layout="row" layout-align="start center" flex>
+                
+                <md-icon md-font-icon="icon-magnify" class="white-text icon search-icon"></md-icon>
+                <input id="invoices-products-search" class="search-input" type="text" placeholder="Search"
+                       fuck_translate fuck_translate-attr-placeholder="EC.SEARCH" flex>
+            </div>
+        </div>
+        <!-- / CONTENT HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card" layout="column" flex>
+
+            <!-- CONTENT TOOLBAR -->
+
+            <!-- / CONTENT TOOLBAR -->
+
+            <!-- CONTENT -->
+            <div class="content fullpage-datatable" layout="column" flex>
+
+                <table class="dataTable row-border hover" datatable="ng" dt-instance="vm.dtInstance"
+                       dt-options="vm.dtOptions">
+                    <thead>
+                        <tr>
+                            <th class="secondary-text">
+                                <div class="table-header">
+                                    <span class="column-title">HSN</span>
+                                </div>
+                            </th>
+                            <th class="secondary-text">
+                                <div class="table-header">
+                                    <span class="column-title">Image</span>
+                                </div>
+                            </th>
+                            <th class="secondary-text">
+                                <div class="table-header">
+                                    <span class="column-title">Name</span>
+                                </div>
+                            </th>
+                            <th class="secondary-text">
+                                <div class="table-header">
+                                    <span class="column-title">Category</span>
+                                </div>
+                            </th>
+                            <th class="secondary-text">
+                                <div class="table-header">
+                                    <span class="column-title">Price / unit</span>
+                                </div>
+                            </th>
+                            <th class="secondary-text">
+                                <div class="table-header">
+                                    <span class="column-title">Quantity</span>
+                                </div>
+                            </th>
+                            <th class="secondary-text">
+                                <div class="table-header">
+                                    <span class="column-title">Measure</span>
+                                </div>
+                            </th>
+                            <th class="secondary-text">
+                                <div class="table-header">
+                                    <span class="column-title">Active</span>
+                                </div>
+                            </th>
+                            <th class="secondary-text">
+                                <div class="table-header">
+                                    <span class="column-title">Actions</span>
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="product in vm.products">
+                            <td>{{product.hsn}}</td>
+                            <td><img class="product-image" ng-src="assets/images/ecommerce/product-image-placeholder.png"></td>
+                            <td>{{product.name}} &nbsp; {{'No. '+product.size}} {{product.class}} {{product.packing+'DB'}}</td>
+                            <td><div ng-repeat="cat in product.categories">{{cat + ' '}}</div></td>
+                            <td>{{product.priceTaxExcl+' ₹'}}</td>
+                            <td>{{product.quantity}}</td>
+                            <td>{{product.measure+' '}}</td>
+                            <td>{{product.active}}</td>
+                            <td>
+                                <md-button class="edit-button md-icon-button" ng-click="vm.gotoProductDetail(product._id)" aria-label="Product details"
+                                           fuck_translate fuck_translate-attr-aria-label="EC.PRODUCT_DETAILS">
+                                    <md-icon md-font-icon="icon-pencil" class="s16"></md-icon>
+                                </md-button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+            <!-- / CONTENT -->
+
+        </div>
+        <!-- / CONTENT CARD -->
+
+    </div>
+    <!-- / CENTER -->
+
+</div>

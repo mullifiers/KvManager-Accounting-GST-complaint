@@ -1,0 +1,44 @@
+<!-- SIDENAV HEADER -->
+<div class="header md-padding" layout="row" layout-align="start center">
+
+    <!-- USER -->
+    <img ng-src="{{vm.user.avatar}}" class="md-avatar avatar mr-16"
+         alt="{{vm.user.name}}"/>
+    <span class="font-weight-500 font-size-14">{{vm.user.name}}</span>
+    <!-- / USER -->
+
+</div>
+<!-- / SIDENAV HEADER -->
+
+<md-divider></md-divider>
+
+<!-- SIDENAV CONTENT -->
+<div ms-scroll class="content scrollable">
+
+    <md-list>
+
+        <md-list-item ng-click="vm.filterChange('all')" ng-class="{'selected':vm.listType ==='all'}">
+            <p >
+                All Rate-Lists
+            </p>
+        </md-list-item>
+
+        <md-list-item ng-click="vm.filterChange('frequent')" ng-class="{'selected':vm.listType ==='frequent'}">
+            <p >
+                Frequently used
+            </p>
+        </md-list-item>
+
+        <md-list-item ng-click="vm.filterChange('starred')" ng-class="{'selected':vm.listType ==='starred'}">
+            <p >
+                Starred lists
+            </p>
+        </md-list-item>
+
+        <md-divider></md-divider>
+
+
+    </md-list>
+
+</div>
+<!-- / SIDENAV CONTENT -->

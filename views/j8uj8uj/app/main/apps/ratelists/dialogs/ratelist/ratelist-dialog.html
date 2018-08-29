@@ -1,0 +1,75 @@
+<!-- DIALOG -->
+<md-dialog class="ratelist-dialog" aria-label="New Task">
+
+    <form name="ratelistForm" class="md-inline-form" novalidate>
+
+        <!-- DIALOG TOOLBAR -->
+        <md-toolbar class="md-accent" layout="column">
+
+            <!-- TOOLBAR TOP -->
+            <div class="md-toolbar-tools md-toolbar-tools-top" layout="row" layout-align="space-between center">
+                <span class="title">{{vm.title}}</span>
+                <md-button class="md-icon-button" ng-click="vm.closeDialog()" aria-label="Close dialog" translate
+                           translate-attr-aria-label="RATELISTS.CLOSE_DIALOG">
+                    <md-icon md-font-icon="icon-close"></md-icon>
+                </md-button>
+            </div>
+            <!-- / TOOLBAR TOP -->
+
+        </md-toolbar>
+        <!-- / DIALOG TOOLBAR -->
+
+        <!-- DIALOG CONTENT -->
+        <md-dialog-content ms-scroll>
+
+            <md-input-container class="md-icon-float md-block">
+                <label translate="RATELISTS.NAME_REQUIRED">Name (required)</label>
+                <md-icon md-font-icon="icon-account" class="name"></md-icon>
+                <input ng-model="vm.ratelist.name" type="text" ng-required md-autofocus>
+            </md-input-container>
+
+                                   
+            <md-input-container  class="md-icon-float md-block" >
+                
+                <md-icon md-font-icon="icon-home"></md-icon>
+                <textarea  name="Description" rows="3" md-maxlength="70" maxlength="70" md-select-on-focus ng-model="vm.ratelist.description" type="text"
+                        placeholder="Description" flex></textarea>
+            </md-input-container>
+        
+        </md-dialog-content>
+        <!-- / DIALOG CONTENT -->
+
+        <!-- DIALOG ACTIONS -->
+        <md-dialog-actions layout="row" layout-align="space-between center">
+            <div layout="row" layout-align="start center">
+                <md-button type="submit" ng-if="!vm.newRatelist" ng-click="vm.saveRatelist()"
+                           class="send-button md-accent md-raised"
+                           ng-disabled="ratelistForm.$invalid || ratelistForm.$pristine"
+                           aria-label="SAVE" translate="RATELISTS.SAVE" translate-attr-aria-label="RATELISTS.SAVE">
+                    SAVE
+                </md-button>
+
+                <md-button type="submit" ng-if="vm.newRatelist" ng-click="vm.addRatelist()"
+                           class="send-button md-accent md-raised"
+                           ng-disabled="ratelistForm.$invalid || ratelistForm.$pristine"
+                           aria-label="Add Task" translate="RATELISTS.ADD_RATELIST"
+                           translate-attr-aria-label="RATELISTS.ADD_RATELIST">
+                    ADD RATELIST
+                </md-button>
+
+            </div>
+
+            <div layout="row">
+                <md-button class="md-icon-button" ng-click="vm.deleteRatelistConfirm($event)" aria-label="Delete"
+                           translate translate-attr-aria-label="RATELISTS.DELETE">
+                    <md-icon md-font-icon="icon-delete"></md-icon>
+                    <md-tooltip><span translate="RATELISTS.DELETE">DELETE</span></md-tooltip>
+                </md-button>
+            </div>
+        </md-dialog-actions>
+        <!-- / DIALOG ACTIONS -->
+
+    </form>
+
+</md-dialog>
+<!-- / DIALOG -->
